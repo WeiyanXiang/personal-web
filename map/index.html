@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<body>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="http://d3js.org/topojson.v1.min.js"></script>
+  <!-- I recommend you host this file on your own, since this will change without warning -->
+  <script src="http://datamaps.github.io/scripts/datamaps.world.min.js?v=1"></script>
+  <h2>World Map</h2>
+  <div id="map" style="position: relative; width: 90%; height: 800px;"></div>
+ 
+     
+  <script>
+ var basic = new Datamap({
+  element: document.getElementById("map"),
+  projection: 'mercator',
+  //   geographyConfig: {
+  //   popupOnHover: false,
+  //   highlightOnHover: false
+  // },
+
+  fills: {
+    defaultFill: '#ABDDA4',
+    USA: 'blue',
+    RUS: 'red',
+    AUS: 'orange'
+  }
+});
+
+var colors = d3.scale.category10();
+
+basic.bubbles([
+  {
+    radius: 25,
+    value: 15000,
+    country: 'USA',
+    fillKey: 'USA',
+    date: '1954-03-01',
+    latitude: 41.415,
+    longitude: -100.1619
+  },{
+    radius: 75,
+    value: 50000,
+    country: 'RUS',
+    fillKey: 'RUS',
+    date: '1961-10-31',
+    latitude: 63.482,
+    longitude: 84.5854
+  }, {
+    radius: 30,
+    value: 60000,
+    country: 'AUS',
+    fillKey: 'AUS',
+    date: '1984-03-01',
+    latitude: -28.415,
+    longitude: 130.1619
+  },
+], {
+  popupTemplate: function(geo, data) {
+    return '<div class="hoverinfo">Value:' + data.value + ' Date:' + data.date + ' Country: '  + data.country + ''
+  }
+});
+
+
+var defaultOptions = {
+    scope: 'world', //currently supports 'usa' and 'world', however with custom map data you can specify your own
+    //setProjection: setProjection, //returns a d3 path and projection functions
+    projection: 'equirectangular', //style of projection to be used. try "mercator"
+    height: null, //if not null, datamaps will grab the height of 'element'
+    width: null, //if not null, datamaps will grab the width of 'element'
+    done: function() {}, //callback when the map is done drawing
+    fills: {
+      defaultFill: '#ABDDA4' //the keys in this object map to the "fillKey" of [data] or [bubbles]
+    },
+    dataType: 'json', //for use with dataUrl, currently 'json' or 'csv'. CSV should have an `id` column
+    dataUrl: null, //if not null, datamaps will attempt to fetch this based on dataType ( default: json )
+    geographyConfig: {
+        dataUrl: null, //if not null, datamaps will fetch the map JSON (currently only supports topojson)
+        hideAntarctica: true,
+        borderWidth: 1,
+        borderColor: '#FDFDFD',
+        popupTemplate: function(geography, data) { //this function should just return a string
+          return '<div class="hoverinfo"><strong>' + geography.properties.name + '</strong></div>';
+        },
+        popupOnHover: true, //disable the popup while hovering
+        highlightOnHover: true,
+        highlightFillColor: '#FC8D59',
+        highlightBorderColor: 'rgba(250, 15, 160, 0.2)',
+        highlightBorderWidth: 2
+    },
+    bubblesConfig: {
+        borderWidth: 2,
+        borderColor: '#FFFFFF',
+        popupOnHover: true,
+        popupTemplate: function(geography, data) {
+          return '<div class="hoverinfo"><strong>' + data.name + '</strong></div>';
+        },
+        fillOpacity: 0.75,
+        highlightOnHover: true,
+        highlightFillColor: '#FC8D59',
+        highlightBorderColor: 'rgba(250, 15, 160, 0.2)',
+        highlightBorderWidth: 2,
+        highlightFillOpacity: 0.85
+    },
+    arcConfig: {
+      strokeColor: '#DD1C77',
+      strokeWidth: 1,
+      arcSharpness: 1,
+      animationSpeed: 600
+    }
+  };
+  </script>
+
+</body>
