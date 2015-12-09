@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.node {
+  stroke: #000;
+  stroke-width: 2px;
+}
+
+.link {
+  stroke: #999;
+  stroke-opacity: .6;
+}
+
+</style>
+<body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+
+
+
+d3.json("sample.json", function(error, graph) {
+
+  var viz = graph.viz;
+  var width = 1400,
+      height = 740;
+  var maxRadius = 30;
+  var color = d3.scale.category20();
+
+  var force = d3.layout.force()
+      .charge(-20)
+      .linkDistance(30)
+      .size([width, height]);
+
+  var svg = d3.select("body").append("svg")
+      .attr("width", width)
+      .attr("height", height);
+
+  var tooltip = d3.select("body")
+    .append("div")
+    .attr("id", "tooltip")
+    .style("position", "absolute")
+    .style("z-index", "10")
+    .style("visibility", "hidden")
+    //.style("font-size", "18px")
+    .style("color", "#000023")
+    .style("font-weight", "bold")
+    .style("background-color", "#eee")
+    //.style("display", "inline")
+    .style("font-style", "italic")
+    .style("font-size", "1em")
+    .style("line-height", "1.5em")
+    .style("font-family", "verdana,sans-serif")
+    .style("border-radius", "10px")
+    .text("");
+
+  var n = graph.viz.length;
+  var counter = 0;
+
+  var nodes = d3.range(n).map(function() {
+
+  var stack=[];
+  var index=0;
+
+  // stack all category into one array.
+  for(index;index<viz.length;index++){
+    if($.inArray(viz[index].category, stack)== -1){
+       stack.push(viz[index].category);
+    }
+  }
+
+  var m = stack.length; 
+  var clusters = new Array(stack.length);
+
+  var max=0;
+  var num=0;
+  for(num; num<viz.length;num++){
+    if(max<parseInt(viz[num].value)) max= parseInt(viz[num].value);
+
+  }
+
+  // i stands for cluster index
+  var i = counter;
+  // var r = Math.sqrt((i + 1) / m * -Math.log(viz[counter].value/10)) * maxRadius ;
+  var r =  (parseInt(viz[counter].value)/max) * maxRadius +5 ;
+
+  var d = {
+        name: viz[counter].name,
+        Symbol: viz[counter].Symbol,
+        value: viz[counter].value,
+        IPO: viz[counter].IPO,
+        Sector: viz[counter].Sector,
+        Country: viz[counter].Country,
+        Continent: viz[counter].Continent,
+        Link: viz[counter].Link,
+        // cluster: viz[counter].category,
+        cluster: parseInt((function(){
+                
+                    var key;
+                    for(key in stack){
+                      if(stack[key] == viz[counter].category){
+                        return key;
+                      }
+                    }
+                    return 0;
+                  })()),
+        category: viz[counter].category,
+        radius: Math.round(r),
+        x: Math.round(Math.cos(i / m * 2 * Math.PI) * 200 + width / 2 + Math.random()),
+        y: Math.round(Math.sin(i / m * 2 * Math.PI) * 200 + height / 2 + Math.random())
+      };
+
+    counter++;
+    // the line below is to store every largest r bubble in a cluster array.
+    if (!clusters[i] || (r > clusters[i].radius)) clusters[i] = d;
+    // console.log(d);
+    return d;
+  });
+
+
+  force
+      .nodes(nodes)
+      .size([width, height])
+      .start();
+
+  var link = svg.selectAll(".link")
+      .data(nodes)
+    .enter().append("line")
+      .attr("class", "link")
+      .style("stroke-width", function(d) { return Math.sqrt(d.value); });
+
+
+
+  var node = svg.selectAll(".node")
+      .data(nodes)
+    .enter().append("circle")
+      .attr("class", "node")
+      .attr("r", function(d){return (d.radius);})
+      .style("fill", function(d) { return color(d.cluster); })
+
+      .on("mouseover", 
+          function(d){
+            $('#tooltip').append('<div>Name: '+ d.name+'</div>');
+            $('#tooltip').append('<div>Category: '+ d.category+'</div>');
+            $('#tooltip').append('<div>Symbol: '+ d.Symbol+'</div>');
+            $('#tooltip').append('<div>Value: '+ d.value+'</div>');
+            $('#tooltip').append('<div>IPO: '+ d.IPO+'</div>');
+            $('#tooltip').append('<div>Sector: '+ d.Sector+'</div>');
+            $('#tooltip').append('<div>Continent: '+ d.Continent+'</div>');
+            $('#tooltip').append('<div>Link: '+ d.Link+'</div>');
+            // tooltip.style("color", color( d.cluster ) ); 
+            return tooltip.style("visibility", "visible");})
+
+      .on("mousemove", function(){return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+      .on("mouseout", function(){$('#tooltip').empty(); return tooltip.style("visibility", "hidden");})
+      .style("fill", function(d) { 
+          return color( d.cluster ); })
+
+      .call(force.drag);
+
+  node.append("title")
+      .text(function(d) { return d.name; });
+
+  force.on("tick", function() {
+    // link.attr("x1", function(d) { console.log(d); return d.x; })
+    //     .attr("y1", function(d) { return d.y; })
+    //     .attr("x2", function(d) { return d.px; })
+    //     .attr("y2", function(d) { return d.py; });
+
+    node.attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; });
+  });
+});
+
+</script>
