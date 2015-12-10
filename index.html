@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<title>Weiyan Xiang</title>
-		<link rel="shortcut icon" href="images/profile.jpg">
+		<link rel="shortcut icon" href="images/profile2.jpg">
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -13,9 +13,18 @@
 	</head>
 	<body id="top">
 
+		<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
+
 		<!-- Header -->
 			<header id="header">
-				<a href="https://uk.linkedin.com/in/weiyanxiang" class="image avatar"><img src="images/profile.jpg" alt="profile" /></a>
+				<a href="https://uk.linkedin.com/in/weiyanxiang" class="image avatar"><img src="images/profile2.jpg" alt="profile" /></a>
 				<h1>
 				<strong>
 					<a href="https://uk.linkedin.com/in/weiyanxiang" target="_blank">Weiyan XIANG </a> <br />
@@ -33,15 +42,35 @@
 						<header class="major">
 							<h2>Welcome to my Web Page</h2>
 						</header>
-						<p>I am a highly motivated Computer Science Master graduate from University College London (UCL), currently work as a software developer. Familiar with Data Analytics, <a href="./cluster" target="_blank"> Data Visualization </a>, Data Mining, Data ETL, <a href="http://i3search.com/2/" target="_blank">Web Development </a>, Machine Learning (Regression, Clustering), <a href="#">Social Network Analysis </a>, Distributed system, Cloud Computing and <a href="#"> Information Retrieval </a>.
-						</p>
 
+						<div class="fb-like" data-href="http://weiyan.16mb.com/" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>						
+						<p>I currently work as a software developer. I finished master study at UCL in 2014.
+							<br>I am familiar with Web Development, Data Mining & Analytics, <a href="./cluster" target="_blank"> Data Visualization </a>, Search Engine <a href="http://i3search.com/2/" target="_blank"></a>, Machine Learning (Regression, Clustering), <a href="#">Social Network Analysis </a>, Distributed system, Cloud Computing and <a href="#"> Information Retrieval </a>.
+						</p>
 						<p>
-						Proficient in Java, JavaScript (jQuery) and SQL. Have experience in PHP, Python, C#, ASP.NET& R. Have exposure in Linux, Git, Network protocols, bash, pair programming, CI and Agile.
+							Proficient in <b>Java, JavaScript (jQuery) and SQL</b>. Have experience in <b>PHP, Python, C#, ASP.NET& R</b>. Have exposure in Linux, Git, Network protocols, bash, pair programming, CI and Agile.
+						</p>
+						<p id="specialFont">
+							I undertake freelance software projects. If you are interested, please contact me.
 						</p>
 						<ul class="actions">
-							<li><a href="#two" class="button">Learn More</a></li>
+							<li><div id="moreCv" class="button">More in CV</div></li>
 						</ul>
+
+						<div id="pdf" class="hideCv">
+						   <object id="pdfiFrame" data="pdf/CV_Weiyan_Xiang.pdf?#view=fitH" type="application/pdf" 
+						   	width="100%" height="100%">
+						       <param name="view" value="fitH" />
+						   </object> 
+						</div>
+
+						<!-- <iframe id="pdfiFrame" src="pdf/CV_Weiyan_Xiang.pdf" frameborder="0" scrolling="no">
+						     <param name="view" value="Fit" />
+						     <p>Your web browser doesn't support iframes.</p>
+						</iframe> -->
+
+						 
+
 					</section>
 
 				<!-- Two -->
@@ -58,10 +87,20 @@
 								<h3>Dynamic Bubble Cluters</h3>
 								<p>Force-enabled bubble cluters which demonstrated pharmaceutical companies ranking in various approaches.</p>
 							</article>
-							<article class="6u 12u$(xsmall) hide">
+							<article class="12u">
+								<ul class="actions">
+									<li><div id="fullPortfolio" class="button">Full Portfolio</div></li>
+								</ul>
+						    </article>
+							<!-- <article class="6u 12u$(xsmall) hide">
 								<a href="./movie_atlas" target="_blank" class="image fit thumb"><img src="images/portfolio/p10.jpg" alt="" /></a>
 								<h3>Movie Atlas Visualisation Dashboard</h3>
 								<p>Visulised IMDB data into clickable bubble charts which significantly help user to search for. Maybe I shoudn't open its souce code.</p>
+							</article> -->
+							<article class="6u 12u$(xsmall) hide">
+								<a href="./bar" target="_blank" class="image fit thumb"><img src="images/portfolio/p8.jpg" alt="" /></a>
+								<h3>Sortable Bar Chart</h3>
+								<p>This is an animated self-sorting Bar Chat. Tick checkbox for sorting or wait for a few seconds.</p>
 							</article>
 							<article class="6u$ 12u$(xsmall) hide">
 								<a href="./gapminder" target="_blank" class="image fit thumb"><img src="images/portfolio/p4.jpg" alt="" /></a>
@@ -74,35 +113,28 @@
 								<p>Force-added round network which demonstrated pharmaceutical companies ranking in various approaches. </p>
 							</article>
 							<article class="6u$ 12u$(xsmall) hide">
-								<a href="./trend" target="_blank" class="image fit thumb"><img src="images/portfolio/p6.jpg" alt="" /></a>
-								<h3>Stock Market Time Series Analysis Tool</h3>
-								<p>This is a Time Series Visualization. You could hold your mouse pointer for a selected distance (either horizontally or vertically) on the chart. It will zoom in automatically. 
-								</p>
+								<a href="./drag" target="_blank" class="image fit thumb"><img src="images/portfolio/p3.jpg" alt="" /></a>
+								<h3>Draggable Visualisation </h3>
+								<p>Draggable Bubble Charts Visualisation using same demo pharmaceutical companies. </p>
 							</article>
-							<article class="6u 12u$(xsmall) hide" >
+							<!-- <article class="6u 12u$(xsmall) hide" >
 								<a href="./employee" target="_blank" class="image fit thumb"><img src="images/portfolio/p7.jpg" alt="" /></a>
 								<h3>Timeline of Employee</h3>
 								<p>Time Series Demo: Timeline of When Employees Started Their Employment.</p>
-							</article>
-							<article class="6u 12u$(xsmall) hide">
-								<a href="./bar" target="_blank" class="image fit thumb"><img src="images/portfolio/p8.jpg" alt="" /></a>
-								<h3>Sortable Bar Chart</h3>
-								<p>This is an animated self-sorting Bar Chat. Tick checkbox for sorting or wait for a few seconds.</p>
-							</article>
+							</article> -->
 							<article class="6u 12u$(xsmall) hide">
 								<a href="./map" target="_blank" class="image fit thumb"><img src="images/portfolio/p9.jpg" alt="" /></a>
 								<h3>Datamap</h3>
 								<p> SVG map visualizations for the web in a single Javascript file using D3.js</p>
 							</article>
-							<article class="6u 12u$(xsmall) hide">
-								<a href="./drag" target="_blank" class="image fit thumb"><img src="images/portfolio/p3.jpg" alt="" /></a>
-								<h3>Draggable Visualisation </h3>
-								<p>Draggable Bubble Charts Visualisation using same demo pharmaceutical companies. </p>
+							
+							<article class="6u$ 12u$(xsmall) hide">
+								<a href="./trend" target="_blank" class="image fit thumb"><img src="images/portfolio/p6.jpg" alt="" /></a>
+								<h3>Stock Market Time Series Analysis Tool</h3>
+								<p>This is a Time Series Visualization. You could hold your mouse pointer for a selected distance (either horizontally or vertically) on the chart. It will zoom in automatically.
+								</p>
 							</article>
 						</div>
-						<ul class="actions">
-							<li><div id="fullPortfolio" class="button">Full Portfolio</div></li>
-						</ul>
 					</section>
 
 					<section id="games">
@@ -493,7 +525,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 					<li><a href="https://www.facebook.com/weiyan.xiang" target="_blank" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
 					<li><a href="http://www.weibo.com/1737443893" target="_blank" class="icon fa-weibo"><span class="label">Weibo</span></a></li>
 					<li><a href="mailto:LTXFXWY@gmail.com" target="_blank" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
-					<li><a href="./dan/index.html" target="_blank" class="icon fa-heart"><span class="label">Dan</span></a></li>
+					<li><a href="./dan/index.html" target="_blank" class="icon fa-heart" id="danDiv" style="opacity:0;;"><span class="label">Dan</span></a></li>
 				</ul>
 				<ul class="copyright">
 					<li>&copy; Personal Website</li>
